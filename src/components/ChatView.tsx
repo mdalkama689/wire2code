@@ -5,11 +5,12 @@ import axios, { AxiosError } from "axios";
 import Image from "next/image";
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { Button } from "./ui/button";
-import { Loader, Loader2, Wand2 } from "lucide-react";
+import { ChevronLeft, Loader, Loader2, Wand2 } from "lucide-react";
 import { PROMPT } from "@/helper/prompt";
 import { messageContext } from "@/context/MessageContext";
 
 import { toast } from "sonner";
+import Link from "next/link";
 
 interface iRoomData {
   files: any;
@@ -23,8 +24,7 @@ interface iRoomData {
 
 function ChatView({ roomId }: { roomId: string }) {
   const [roomData, setRoomData] = useState<iRoomData | null>(null);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [input, setInput] = useState<string>("");
+ 
 
   const hasGenerateRef = useRef(false);
 
@@ -57,7 +57,7 @@ function ChatView({ roomId }: { roomId: string }) {
   };
 
   const handleGenerate = async () => {
-    setIsLoading(true);
+
     const loadingToast = toast.loading("Please wait, generating code...");
     try {
       if (!roomData?.description) return;
@@ -97,7 +97,7 @@ function ChatView({ roomId }: { roomId: string }) {
       toast.error(errorMessage);
     } finally {
       toast.dismiss(loadingToast);
-      setIsLoading(false);
+
     }
   };
 
@@ -110,6 +110,7 @@ function ChatView({ roomId }: { roomId: string }) {
 
   return (
     <div className="flex h-full flex-col px-4  gap-4">
+    <Link href='/dashboard' className="hover:bg-zinc-900 w-fit"><ChevronLeft /></Link>
       <h1 className="text-gray-200 text-xl font-semibold text-center mt-6 tracking-wide">
         Wireframe
       </h1>

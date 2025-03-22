@@ -135,7 +135,7 @@ const indexCssFile = {
 const staterCode = {
   ...tailwindConfigFile,
   ...indexCssFile,
-  ...htmlFile,
+  ...htmlFile, 
   ...postCssFile,
 };
 
