@@ -9,11 +9,11 @@ import { useSession } from "next-auth/react";
 import Footer from "./Footer";
 
 function Landing() {
-    const { status } = useSession();
+  const { status } = useSession();
   return (
     <div className="min-h-screen ">
-<Header />
-      {/* Hero Section */}
+      <Header />
+
       <header className="relative overflow-hidden bg-[#101010]">
         <div className="absolute " />
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-32 relative z-10">
@@ -52,7 +52,6 @@ function Landing() {
         </div>
       </header>
 
-      {/* Features Section */}
       <section className="py-24 bg-[#262626]">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl font-bold text-center mb-16">
@@ -78,7 +77,6 @@ function Landing() {
         </div>
       </section>
 
-      {/* How It Works Section */}
       <section className="py-24 bg-[#0a0a0a]">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl font-bold text-center mb-16">How It Works</h2>
@@ -122,7 +120,6 @@ function Landing() {
         </div>
       </section>
 
-      {/* CTA Section */}
       <section className="py-24  bg-white text-black ">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center ">
           <h2 className="text-3xl font-bold mb-6">
@@ -149,8 +146,7 @@ function Landing() {
         </div>
       </section>
 
-      {/* Footer */}
- <Footer />
+      <Footer />
     </div>
   );
 }

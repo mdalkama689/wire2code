@@ -6,7 +6,7 @@ import Image from "next/image";
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { Button } from "./ui/button";
 import { Loader, Loader2, Wand2 } from "lucide-react";
-import { PROMPT,} from "@/helper/prompt";
+import { PROMPT } from "@/helper/prompt";
 import { messageContext } from "@/context/MessageContext";
 
 import { toast } from "sonner";
@@ -14,7 +14,7 @@ import { toast } from "sonner";
 interface iRoomData {
   files: any;
   id: number;
-  imageUrl: string 
+  imageUrl: string;
   roomId: string;
   userId: string;
   description: string;
@@ -26,7 +26,7 @@ function ChatView({ roomId }: { roomId: string }) {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [input, setInput] = useState<string>("");
 
-  const hasGenerateRef = useRef(false)
+  const hasGenerateRef = useRef(false);
 
   const context = useContext(messageContext);
   if (!context) return;
@@ -61,14 +61,14 @@ function ChatView({ roomId }: { roomId: string }) {
     const loadingToast = toast.loading("Please wait, generating code...");
     try {
       if (!roomData?.description) return;
-    
-      const CODE_PROMPT =roomData?.description  + PROMPT
+
+      const CODE_PROMPT = roomData?.description + PROMPT;
 
       const formValue = {
         imageUrl: roomData?.imageUrl,
         CODE_PROMPT,
         modelName: roomData?.selectedModel,
-        roomId
+        roomId,
       };
 
       const response = await axios.post<ApiResponse>(
@@ -84,13 +84,12 @@ function ChatView({ roomId }: { roomId: string }) {
 
         setFiles(combinedCode);
         setDependencies(parsedDependencies);
-        console.log(response.data.result)
         toast.success("Code has been generated successfully!");
       } else {
         toast.error(response.data.message);
       }
     } catch (error) {
-      console.log(error)
+      console.log(error);
       const axiosError = error as AxiosError<ApiResponse>;
       const errorMessage = axiosError
         ? axiosError.response?.data.message
@@ -102,11 +101,9 @@ function ChatView({ roomId }: { roomId: string }) {
     }
   };
 
-
-
   useEffect(() => {
     if (roomData && !hasGenerateRef.current) {
-      hasGenerateRef.current = true 
+      hasGenerateRef.current = true;
       handleGenerate();
     }
   }, [roomData]);
@@ -129,15 +126,16 @@ function ChatView({ roomId }: { roomId: string }) {
             priority
           />
         </div>
-      ): (
-        <div className="flex items-center justify-center w-full h-64"><Loader2 className="animate-spin"/></div>
+      ) : (
+        <div className="flex items-center justify-center w-full h-64">
+          <Loader2 className="animate-spin" />
+        </div>
       )}
 
-      {/* Text Input & Button */}
       <div className="flex-1 flex flex-col gap-4">
-        <p className="w-full h-24 p-4 resize-none bg-gray-700 rounded-lg border border-gray-600 focus:border-blue-400 focus:ring focus:ring-blue-400 focus:ring-opacity-20 transition"
-        >{roomData?.description}</p>
-
+        <p className="w-full h-24 p-4 resize-none bg-gray-700 rounded-lg border border-gray-600 focus:border-blue-400 focus:ring focus:ring-blue-400 focus:ring-opacity-20 transition">
+          {roomData?.description}
+        </p>
       </div>
     </div>
   );

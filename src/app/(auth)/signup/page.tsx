@@ -53,7 +53,7 @@ function SignUp() {
       try {
         setIsLoading(true);
         const response = await axios.post<ApiResponse>("/api/sign-up", data);
-        console.log(response);
+
         if (response.data.success) {
           toast.message(response.data.message);
           router.push(`/verify-email?email=${data.email}`);

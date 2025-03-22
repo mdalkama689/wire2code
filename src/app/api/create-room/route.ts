@@ -5,7 +5,6 @@ import { NextRequest, NextResponse } from "next/server";
 import authOption from "../auth/[...nextauth]/option";
 import uploadFile from "@/helper/uploadFile";
 
-
 export async function POST(req: NextRequest) {
   try {
     const session = await getServerSession(authOption);
@@ -18,8 +17,8 @@ export async function POST(req: NextRequest) {
     const formData = await req.formData();
     const roomId = formData.get("roomId")?.toString().trim();
     const selectedFile = formData.get("selectedFile") as File;
-    const description = formData.get('description')?.toString().trim()
-    const selectedModel = formData.get('selectedModel')?.toString().trim()
+    const description = formData.get("description")?.toString().trim();
+    const selectedModel = formData.get("selectedModel")?.toString().trim();
 
     if (!roomId) {
       return NextResponse.json({
@@ -28,8 +27,12 @@ export async function POST(req: NextRequest) {
       });
     }
 
-    console.log(formData);
-    const safeParsed = createRoomSchema.safeParse({ roomId, selectedFile, description,selectedModel });
+    const safeParsed = createRoomSchema.safeParse({
+      roomId,
+      selectedFile,
+      description,
+      selectedModel,
+    });
 
     if (!safeParsed.success) {
       return NextResponse.json({
@@ -38,7 +41,7 @@ export async function POST(req: NextRequest) {
       });
     }
 
-    const responseUploadFile = await uploadFile(selectedFile)
+    const responseUploadFile = await uploadFile(selectedFile);
 
     const roomExists = await prisma.chat.findFirst({
       where: {
@@ -59,7 +62,7 @@ export async function POST(req: NextRequest) {
         userId: Number(session.user.id),
         imageUrl: responseUploadFile.secure_url,
         description,
-        selectedModel
+        selectedModel,
       },
     });
 

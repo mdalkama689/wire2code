@@ -2,7 +2,7 @@
 import { staterCode } from "@/helper/prompt";
 import { createContext, useState, } from "react";
 
-const messageContext = createContext<any | null>(null)
+const messageContext = createContext(null)
 
 function MessageProvider({children}: {children: React.ReactNode}) {
     const [files, setFiles] = useState(staterCode)

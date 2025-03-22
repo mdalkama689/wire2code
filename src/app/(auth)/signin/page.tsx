@@ -57,8 +57,7 @@ function SignIn() {
           return toast.error(response.error);
         }
 
-        router.push('/')
-        console.log(response);
+        router.push("/");
       } catch (error) {
         const errorMessage =
           error instanceof Error
@@ -76,7 +75,7 @@ function SignIn() {
       <Card className="w-full max-w-md">
         <CardHeader className="space-y-2 text-center">
           <CardTitle className="text-3xl font-bold">
-          Sign In to Your Account
+            Sign In to Your Account
           </CardTitle>
           <CardDescription></CardDescription>
         </CardHeader>

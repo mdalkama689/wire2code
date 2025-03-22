@@ -61,8 +61,6 @@ You are an expert frontend React developer. You will be given a description of a
 Ensure all components follow **best practices** and are structured for **scalability and maintainability**.
 `;
 
-
-
 const aiModel = [
   {
     name: "google/gemini-2.0-flash-lite-preview-02-05",
@@ -142,4 +140,4 @@ const staterCode = {
 };
 
 const tailwindCDN = "https://cdn.tailwindcss.com";
-export { PROMPT, aiModel, staterCode, tailwindCDN  };
+export { PROMPT, aiModel, staterCode, tailwindCDN };

@@ -29,7 +29,7 @@ function DashBoard() {
 
   const router = useRouter();
 
-  const models = aiModel
+  const models = aiModel;
 
   const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -49,10 +49,8 @@ function DashBoard() {
     setSelectedModel(modelName);
   };
   const handleNavigateRoom = async () => {
-
     const loadingToast = toast.loading("New room is creating...");
     try {
-    
       setIsLoading(true);
 
       const roomId = uuidv4();

@@ -1,28 +1,22 @@
-
-
 import ChatView from "@/components/ChatView";
 import CodeView from "@/components/CodeView";
 import { MessageProvider } from "@/context/MessageContext";
 
-async function Room({params}: {params: {roomId: string}}) {
-  const param=await params
-const {roomId} = param
-
-
+async function Room({ params }: { params: { roomId: string } }) {
+  const param = await params;
+  const { roomId } = param;
 
   return (
-   <MessageProvider>
-     <div className=" flex items-center justify-center py-10 bg-gray-900">
-      {/* Chat Panel */}
-      <div className="w-[30%]">
-        <ChatView roomId={roomId} />
-      </div>
+    <MessageProvider>
+      <div className=" flex items-center justify-center py-10 bg-gray-900">
+        <div className="w-[30%]">
+          <ChatView roomId={roomId} />
+        </div>
 
-      {/* Code Panel */}
-      <div className="w-[70%]">
-        <CodeView roomId={roomId} />
+        <div className="w-[70%]">
+          <CodeView roomId={roomId} />
+        </div>
       </div>
-    </div>
     </MessageProvider>
   );
 }
